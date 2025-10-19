@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flores Amarillas - Belleza Natural</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #fff9c4 0%, #fff3a0 50%, #ffeb3b 100%);
+            min-height: 100vh;
+        }
+
+        /* Partículas flotantes */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #ff6f00 0%, #ffb300 50%, #ffd700 100%);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(255, 193, 7, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            color: white;
+            font-size: 3.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            margin-bottom: 1rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 2px 2px 10px rgba(0,0,0,0.3), 0 0 20px rgba(255, 255, 255, 0.5); }
+            to { text-shadow: 2px 2px 10px rgba(0,0,0,0.3), 0 0 30px rgba(255, 255, 255, 0.8); }
+        }
+
+        .subtitle {
+            color: #fff8e1;
+            font-size: 1.3rem;
+            font-style: italic;
+        }
+
+        /* Navegación */
+        nav {
+            background: rgba(255, 193, 7, 0.9);
+            padding: 1rem 0;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            color: #333;
+            text-decoration: none;
+            margin: 0 2rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            background: white;
+            color: #ff6f00;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 111, 0, 0.3);
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Secciones */
+        .section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .section h2 {
+            color: #ff6f00;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6f00, #ffd700);
+            display: block;
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* Grid de flores */
+        .flores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .flor-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flor-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 235, 59, 0.1) 0%, transparent 70%);
+            transition: all 0.5s ease;
+            transform: scale(0);
+        }
+
+        .flor-card:hover::before {
+            transform: scale(1);
+        }
+
+        .flor-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(255, 193, 7, 0.3);
+        }
+
+        .flor-emoji {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .flor-card h3 {
+            color: #ff6f00;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .flor-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Botones interactivos */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6f00, #ffd700);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 111, 0, 0.4);
+        }
+
+        /* Galería */
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .imagen-placeholder {
+            height: 200px;
+            background: linear-gradient(135deg, #fff9c4, #ffd700);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .imagen-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.5) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .imagen-placeholder:hover::before {
+            transform: translateX(100%);
+        }
+
+        .imagen-placeholder:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 193, 7, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #333 0%, #555 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        /* Animación de entrada */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            nav a {
+                margin: 0 1rem;
+                font-size: 1rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Partículas flotantes -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header>
+        <h1>🌻 Flores Amarillas 🌻</h1>
+        <p class="subtitle">La belleza dorada de la naturaleza</p>
+    </header>
+
+    <!-- Navegación -->
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#tipos">Tipos</a>
+        <a href="#cuidados">Cuidados</a>
+        <a href="#galeria">Galería</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+
+    <div class="container">
+        <!-- Sección de Inicio -->
+        <section id="inicio" class="section fade-in">
+            <h2>Bienvenidos al Mundo de las Flores Amarillas</h2>
+            <p style="font-size: 1.2rem; text-align: center; color: #555; margin-bottom: 2rem;">
+                Las flores amarillas simbolizan alegría, optimismo y energía positiva. Descubre la magia 
+                de estos hermosos regalos de la naturaleza que iluminan nuestros jardines y corazones.
+            </p>
+            <div style="text-align: center;">
+                <a href="#tipos" class="btn">Explorar Variedades</a>
+                <a href="#galeria" class="btn">Ver Galería</a>
+            </div>
+        </section>
+
+        <!-- Tipos de Flores -->
+        <section id="tipos" class="section fade-in">
+            <h2>Variedades Populares</h2>
+            <div class="flores-grid">
+                <div class="flor-card">
+                    <span class="flor-emoji">🌻</span>
+                    <h3>Girasol</h3>
+                    <p>El símbolo del optimismo y la felicidad. Los girasoles siempre buscan la luz del sol, representando esperanza y positividad en nuestras vidas.</p>
+                </div>
+                <div class="flor-card">
+                    <span class="flor-emoji">🌼</span>
+                    <h3>Margarita Amarilla</h3>
+                    <p>Flores delicadas que simbolizan la inocencia y la pureza. Perfectas para decorar jardines y crear ambientes serenos y tranquilos.</p>
+                </div>
+                <div class="flor-card">
+                    <span class="flor-emoji">🌷</span>
+                    <h3>Tulipán Amarillo</h3>
+                    <p>Elegantes flores primaverales que representan la amistad sincera y los sentimientos alegres. Ideales para regalar en ocasiones especiales.</p>
+                </div>
+                <div class="flor-card">
+                    <span class="flor-emoji">🌹</span>
+                    <h3>Rosa Amarilla</h3>
+                    <p>Símbolo de amistad, alegría y nuevos comienzos. Las rosas amarillas expresan calidez y afecto sin la pasión romántica de las rojas.</p>
+                </div>
+                <div class="flor-card">
+                    <span class="flor-emoji">🌺</span>
+                    <h3>Narciso</h3>
+                    <p>Flores que anuncian la llegada de la primavera. Representan el renacimiento, la esperanza y los nuevos comienzos en la vida.</p>
+                </div>
+                <div class="flor-card">
+                    <span class="flor-emoji">🌸</span>
+                    <h3>Caléndula</h3>
+                    <p>Flores vibrantes conocidas por sus propiedades medicinales y su resistencia. Simbolizan la protección y la curación natural.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cuidados -->
+        <section id="cuidados" class="section fade-in">
+            <h2>Consejos de Cuidado</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div style="background: linear-gradient(135deg, #fff3e0, #ffe0b2); padding: 2rem; border-radius: 15px;">
+                    <h3 style="color: #ff6f00; margin-bottom: 1rem;">☀️ Luz Solar</h3>
+                    <p>La mayoría de las flores amarillas necesitan abundante luz solar directa, al menos 6-8 horas diarias para florecer en todo su esplendor.</p>
+                </div>
+                <div style="background: linear-gradient(135deg, #e8f5e8, #c8e6c8); padding: 2rem; border-radius: 15px;">
+                    <h3 style="color: #2e7d32; margin-bottom: 1rem;">💧 Riego</h3>
+                    <p>Mantén el suelo húmedo pero no encharcado. Riega en las primeras horas de la mañana para evitar la evaporación excesiva.</p>
+                </div>
+                <div style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); padding: 2rem; border-radius: 15px;">
+                    <h3 style="color: #1976d2; margin-bottom: 1rem;">🌱 Nutrientes</h3>
+                    <p>Utiliza fertilizantes ricos en fósforo para promover la floración. Aplica cada 2-3 semanas durante la temporada de crecimiento.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galería -->
+        <section id="galeria" class="section fade-in">
+            <h2>Galería de Imágenes</h2>
+            <div class="galeria">
+                <div class="imagen-placeholder">🌻</div>
+                <div class="imagen-placeholder">🌼</div>
+                <div class="imagen-placeholder">🌷</div>
+                <div class="imagen-placeholder">🌹</div>
+                <div class="imagen-placeholder">🌺</div>
+                <div class="imagen-placeholder">🌸</div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <p style="color: #666; font-style: italic;">Haz clic en las imágenes para ver más detalles</p>
+            </div>
+        </section>
+
+        <!-- Datos curiosos -->
+        <section class="section fade-in" style="background: linear-gradient(135deg, #fff8e1, #fff3c4);">
+            <h2>¿Sabías que...?</h2>
+            <div style="display: grid; gap: 1.5rem;">
+                <div style="display: flex; align-items: center; background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <span style="font-size: 2rem; margin-right: 1rem;">🧠</span>
+                    <p>Las flores amarillas pueden mejorar el estado de ánimo y reducir el estrés según estudios de psicología del color.</p>
+                </div>
+                <div style="display: flex; align-items: center; background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <span style="font-size: 2rem; margin-right: 1rem;">🐝</span>
+                    <p>Las abejas pueden ver el color amarillo mejor que otros colores, por eso muchas flores son amarillas para atraerlas.</p>
+                </div>
+                <div style="display: flex; align-items: center; background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <span style="font-size: 2rem; margin-right: 1rem;">🌍</span>
+                    <p>El girasol puede crecer hasta 4 metros de altura y sus cabezas pueden medir hasta 60 cm de diámetro.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contacto">
+        <p><strong>🌻 Flores Amarillas - Belleza Natural 🌻</strong></p>
+        <p>Descubre la magia de las flores que iluminan nuestro mundo</p>
+        <p>&copy; 2025 - Creado con amor por la naturaleza</p>
+    </footer>
+
+    <script>
+        // Crear partículas flotantes
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Animación de entrada para elementos
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationDelay = '0.2s';
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            });
+            
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // Smooth scroll para navegación
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Efectos interactivos en las imágenes
+        document.querySelectorAll('.imagen-placeholder').forEach(img => {
+            img.addEventListener('click', function() {
+                this.style.transform = 'scale(1.1) rotate(5deg)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                }, 300);
+            });
+        });
+
+        // Inicializar efectos
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            animateOnScroll();
+        });
+
+        // Cambio de color de fondo del header al hacer scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            if (scrolled > 100) {
+                header.style.opacity = '0.95';
+            } else {
+                header.style.opacity = '1';
+            }
+        });
+    </script>
+</body>
+</html>
+<footer id="contacto" class="bg-gray-800 text-white py-8 mt-10">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <h3 class="text-xl sm:text-2xl font-bold mb-4">Contacto</h3>
+            <p class="mb-4">¡Estoy aquí para ayudar a tus ideas cobrar vida!</p>
+            <div class="space-y-2 mb-6 text-sm sm:text-base">
+                <p><strong>Correo:</strong> <a href="mailto:kamilavalentinamelonmeche@gmail.com" class="hover:text-primary-300 transition-colors">kamilavalentinamelonmeche@gmail.com</a></p>
+            <p class="text-gray-400 text-xs sm:text-sm">&copy; 2025. Kamila Valentina Melon M. Todos los derechos reservados.</p>
+        </div>
+    </footer>
